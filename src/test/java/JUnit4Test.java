@@ -24,6 +24,7 @@ public class JUnit4Test {
    }
 
     @Test
+    @DisplayName("Проверка выбора ветки")
     public void changeBranchTest() {
 
         JUnit4Page.branchSelectButton()
@@ -55,11 +56,9 @@ public class JUnit4Test {
 
     static Stream<Arguments> releasesSearch() {
         return Stream.of(
-                arguments("номеру", "4.13.1"),
-                arguments("номеру", "4.13.2"),
-                arguments("номеру", "4.13"),
-                arguments("буквам", "RC 2"),
-                arguments("буквам", "RC 1")
+                arguments("по буквам и номеру", "JUnit 4.13.2"),
+                arguments("по номеру", "4.13.2"),
+                arguments("по буквам", "Beta 2")
         );
     }
 }
