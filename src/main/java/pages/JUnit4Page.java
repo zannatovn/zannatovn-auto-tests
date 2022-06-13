@@ -17,4 +17,8 @@ public class JUnit4Page {
     public static SelenideElement releasesButton() {
         return $("[href='/junit-team/junit4/releases'].Link--primary").as("Кнопка 'Releases'");
     }
+
+    public static SelenideElement loader() {
+        return $(".progress-pjax-loader").as("Загрузка страницы");
+    }
 }

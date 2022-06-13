@@ -12,7 +12,7 @@ public class JUnit4ReleasesPage {
         return $("[type='search']").as("Инпут поиска релизов");
     }
 
-    public static ElementsCollection releaseCards() {
+    public static ElementsCollection releasesCard() {
         return $$("[data-test-selector='release-card']");
     }
 
