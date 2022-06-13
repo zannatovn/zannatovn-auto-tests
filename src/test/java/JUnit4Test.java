@@ -13,9 +13,10 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
+import static com.codeborne.selenide.CollectionCondition.allMatch;
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 import static org.openqa.selenium.Keys.ENTER;
@@ -49,7 +50,8 @@ public class JUnit4Test {
         });
 
         step("Проверить, что название текущей ветки сменилось на выбранную", () -> {
-            sleep(1500); //без метода sleep страница не успевает прогрузится (переключится на другую ветку)
+            JUnit4Page.loader()
+                    .shouldNotBe(visible);
             JUnit4Page.branchSelectButton()
                     .shouldHave(text("fixtures"));
         });
@@ -74,16 +76,15 @@ public class JUnit4Test {
        });
 
        step("В результатах поиска отображаются релизы соответствующие поисковому запросу", () -> {
-           JUnit4ReleasesPage.releaseCards()
-                .get(0).as("первый релиз в списке")
-                .shouldHave(text(searchData));
+           JUnit4ReleasesPage.releasesCard()
+                   .shouldBe(allMatch("release", release -> release.getText().contains(searchData)));
        });
     }
 
     static Stream<Arguments> releasesSearch() {
         return Stream.of(
                 arguments("по буквам и номеру", "JUnit 4.13.2"),
-                arguments("по номеру", "4.13.2"),
+                arguments("по номеру", "4.13"),
                 arguments("по буквам", "Beta 2")
         );
     }
