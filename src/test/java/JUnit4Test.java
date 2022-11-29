@@ -45,6 +45,7 @@ public class JUnit4Test {
 
        JUnit4Page.releasesButton()
                .click();
+       //test
        JUnit4ReleasesPage.releaseNavigationButton()
                .shouldHave(text("Releases"));
        JUnit4ReleasesPage.findReleaseInput()
